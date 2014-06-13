@@ -1,0 +1,22 @@
+<div class='ng-modal' ng-show='modalShown'>
+  <div class='ng-modal-overlay' ng-click='hideModal()'></div>
+  <div class='ng-modal-dialog' ng-style='dialogStyle'>
+      <div class='ng-modal-close' ng-click='hideModal()'>X</div>
+      <div class='ng-modal-dialog-content'>
+        <form role="form" action= {{formAction}} method= {{formMethod}} style="max-width: 500px;">
+          <div class="form-group">
+            <p>Username 
+              <input type="text" name="username" placeholder="Enter Username" class="form-control" ng-model = "customerUsername"/>
+            </p>
+          </div>
+          <div class="form-group">
+            <p>Password 
+              <input type="password" name="password" placeholder="Password" class="form-control" ng-model = "customerPassword"/>
+            </p>
+          </div>
+          <button type="submit" class="btn btn-primary" ng-click = "loginSubmit()">Submit  </button>
+          <button type="submit" class="btn btn-primary" ng-click = "hideModal()">Cancel  </button>       
+        </form><a href="/register">New User</a>
+      </div>
+  </div>
+</div>

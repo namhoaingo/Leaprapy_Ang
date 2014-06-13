@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaprapy</title>
+    <!-- Bootstrap Core CSS-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Fonts-->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <!-- Custom Theme CSS-->
+    <link href="./public/css/grayscale.css" rel="stylesheet">
+    </head>
+  <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+    <nav role="navigation" class="navbar navbar-custom navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header page-scroll">
+          <button type="button" data-toggle="collapse" data-target=".navbar-main-collapse" class="navbar-toggle"><i class="fa fa-bars"></i></button><a href="/" class="navbar-brand"><i class="fa fa-play-circle"></i><span class="light">Leaprapy</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+          <ul class="nav navbar-nav">
+            <li class="hidden"><a href="#page-top"></a></li>
+           
+<!--               <li ng-click = 'toggleModal()' ng-controller = 'loginController'> 
+                <!-- <button ng-click='toggleModal()'> Login
+                </button> -->
+<!--                 <modal-dialog modalShown='modalShown' width='750px' height='60%'>
+                </modal-dialog> 
+                  <a>Login</a>
+              </li> -->
+             <li><a href="#/login">Login</a></li>
+            <li><a href="#/activities">Activities</a></li>
+            <li><a href="#/assessments">Assessments</a></li>
+            <li><a href="#/reports">Reports</a></li>
+            <li class="page-scroll"><a href="#about">About</a></li>
+            <li class="page-scroll"><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+   <ng-view></ng-view>
+
+     <!-- Angular-->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <!-- App libs -->
+    <script src="public/app/app.js"></script>
+    <script src="public/app/controller/controllers.js"></script> 
+    <script src="public/app/directives/animatedView.js">
+    </script>
+    <script src="public/app/services/service.js"></script>
+  </body>
+
+</html>

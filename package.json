@@ -1,0 +1,22 @@
+{
+	"name"			: "Leaprapy",
+	"version"		: "1.0.0",
+	"description"	: "This version will be enhanced by AngularJS",
+	"main"			: "server.js",
+	"author"		: "Nam Ngo",
+	"dependencies"	: {
+		"express"	: "3.4.4",
+		"express"	: "3.4.3",
+	    "mongoose"	: "~3.8.4",
+	    "passport"	: "~0.1.18",
+	    "passport-local-mongoose"	: "~0.2.5",
+	    "passport-local"			: "~0.1.6",
+	    "grunt"						: "~0.4.2",
+	    "grunt-cli"					: "~0.1.11",
+	    "grunt-env"					: "~0.4.1",
+	    "grunt-contrib-watch"		: "~0.5.3",
+	    "grunt-nodemon"				: "latest",
+	    "grunt-concurrent"			: "latest",
+	    "lodash"					: "^2.4.1"
+	}
+}
