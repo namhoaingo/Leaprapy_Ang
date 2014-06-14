@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('myApp.controllers', [])
-.controller('mainController', ['$scope', function($scope) {
+.controller('mainController', ['$scope', '$rootScope' , function($scope) {
 	init();
 	function init(){
+
+  
 	$scope.introText = 'Online practice and assessments for fine motor skills';
 	$scope.about = 'Leaprapy is an web application which interacts with the Leap Motion.\
           Consumers will practice different motor skills through some practices in the web site.\
@@ -13,7 +15,7 @@ angular.module('myApp.controllers', [])
           there are some activities or assessments that you want to recommend, please contact us directly.';
       };
 }])
-.controller('loginController', function($scope, $http, userAuth){
+.controller('loginController', function($scope, $http ,$location, $routeParams, userAuth, $rootScope){
 	  $scope.modalShown = false;
 
     // $scope.formAction = '/login';
@@ -32,25 +34,22 @@ angular.module('myApp.controllers', [])
          $scope.test = 1;
          $scope.test ++;
          $scope.loading = true;
+
+         // Store the data to the function
          userAuth.postLogin($scope.userLoginCredentials)
           .success(function(user, message){
               $scope.loading = false;
               if (user != null){
-                $scope.userData = user;
+                //$rootScope.userData = user;
+                window.location = "http://localhost:3000/";
               }
               else{
                 $scope.message = message; 
+
               } 
               $scope.userLoginCredentials = {};
           });
-        // var xhr = new XMLHttpRequest();
-        // xhr.open(formMethod, formAction, true);
-        // xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
-        // // send the collected data as JSON
-        // xhr.send(JSON.stringify(userLoginCredentials));
-
-        //window.location = "http://localhost:3000/";
 
 
     };
@@ -76,5 +75,19 @@ angular.module('myApp.controllers', [])
                   the assessments. Base on these calculations, we can determind their level of \
                   accuracy which is shown in the report section";
 }])
+.controller('navController', function($scope, $http, $rootScope, $routeParams, userAuth) {
+  
 
+    $scope.userAuthenticated = false;
+    
+     userAuth.getLogin().success(function(user){
+      $scope.user = user;
+    });
+ 
+  
+  if ($scope.users != null)
+    {
+      $scope.userAuthenticated = true;
+    }
+})
 ;

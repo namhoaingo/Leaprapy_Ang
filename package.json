@@ -17,6 +17,7 @@
 	    "grunt-contrib-watch"		: "~0.5.3",
 	    "grunt-nodemon"				: "latest",
 	    "grunt-concurrent"			: "latest",
-	    "lodash"					: "^2.4.1"
+	    "lodash"					: "^2.4.1",
+	    "connect-flash"				: "latest"
 	}
 }

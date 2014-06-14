@@ -6,6 +6,7 @@ var app 	 = express();
 var mongoose = require("mongoose");
 var passport = require ('passport');
 var User     = require ('./models/user');
+// var flash = require('connect-flash');
 var LocalStrategy = require('passport-local').Strategy;
 
 mongoose.connect('mongodb://leapuser:leappass@alex.mongohq.com:10008/leapcare'); 
@@ -21,6 +22,13 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.static(__dirname)); 
 app.use(express.bodyParser()); 
 
+app.set('view engine', 'html');
+app.use(express.cookieParser());
+app.use(express.session({ secret: 'keyboard cat'} ));
+
+// app.use(express.cookieSession('secret'));
+// app.use(flash());
+
 // app.use(express.cookieSession());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -32,7 +40,31 @@ console.log('App is listening on port %d', this.address().port);
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+	
+	// The problem with using this one is it is not hash
+// passport.use(new LocalStrategy(
+//   function(username,password, done) {
+//   	console.log ("Got to passport Strategy");
+//   	console.log (username);
+//   		console.log (password);
+//     User.findOne({ username: username }, function(err, user) {
+// 	console.log ("inside find one");
+// 	if (err) { 
+// 		console.log ("error");
+// 		return done(err); }
+// 	if (!user) {
+// 	console.log ("not valid user");
+// 	return done(null, false, { message: 'Incorrect username.' });
 
+// 	}
+// 	if (user.password != password) { 
+// 		return done(null, false, { message: 'Invalid password' }); 
+// 	}
+//       console.log ("Got user");
+//       return done(null, user);
+//     });
+//   }
+// ));
 // Route
 
 // 1. Authenticate user
@@ -67,52 +99,42 @@ passport.deserializeUser(User.deserializeUser());
 
 //   })
 // );
+// app.post('/loginREST',
+//   passport.authenticate('local', { successRedirect: '/',
+//                                    failureRedirect: '/login'})
+// );
+
+app.get('/loginREST', function(req, res){
+   console.log(res);
+  res.send({ user: req.user});
+});
+
+
 // app.post('/loginREST', function(req, res){
 // 	//I expect inputs in an array
 // 	console.log("here");
-// 	passport.use(new LocalStrategy(
-// 	  function(username,password, done) {
-// 	    User.findOne({ username: req.body.username }, function(err, user) {
-// 	      if (err) { return done(err); }
-// 	      if (!user) {
-// 	        console.log ("not valid user");
-// 	        return done(null, false, { message: 'Incorrect username.' });
-	        
-// 	      }
-// 	      if (!user.validPassword(req.body.password)) {
-// 	        console.log ("not valid password");
-// 	        return done(null, false, { message: 'Incorrect password.' });
-	        
-// 	      }
-// 	      console.log ("Got user");
-// 	      return done(null, user);
-// 	    });
-// 	  }
-// 	));
+// 	passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),function(req, res) {
+//     	res.redirect('/');
+// 	};
 // 	console.log(req.body);
 // });
 
-  app.post('/loginREST', passport.authenticate('local', {session: true}), function(req, res) {
-      
-      if (req.body.activity){
-        console.log("i am in the first if");
-        res.redirect('/activities/' +req.body.activity);
+app.post('/loginREST', passport.authenticate('local', {session: true}), function(req, res) {
+  
+  res.send({user:res.user}); 
+  
+});
 
-      }
-      else{
-        if (req.body.assessment){
-        	console.log("i am in the second else");
-           res.redirect('/assessments/' +req.body.assessment);
-        }
-        else{  
-          console.log("i am in the last else");
-          res.send(req.user); 
-
-        }
-      }
-      console.log("i am here");
-  });
-
+// app.get('/loginREST', function(req, res, next) {
+//   passport.authenticate('local', function(err, user, info) {
+//     if (err) { return next(err); }
+//     if (!user) { return res.redirect('/login'); }
+//     req.logIn(user, function(err) {
+//       if (err) { return next(err); }
+//       return res.redirect('/users/' + user.username);
+//     });
+//   })(req, res, next);
+// });
 	// create todo and send back all todos after creation
 	app.post('/api/todos', function(req, res) {
 

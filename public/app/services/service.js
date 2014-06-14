@@ -6,7 +6,7 @@ angular.module('myApp.services', [])
 		return {
 			// The get login I do not quite see the usage
 			getLogin : function() {
-				return $http.get('/login');
+				return $http.get('/loginREST');
 			},
 			// Used to authenticate use
 			postLogin : function(userLoginInfo) {
